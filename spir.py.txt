@@ -1,0 +1,130 @@
+n = int(input())
+b = [ [ 0 for i in range(n) ] for j in range(n) ]
+count, step=0,0
+x,y,dx,dy = 0,0,0,0
+a=1
+print()
+
+#Заполняем центр
+b[n//2][n//2] = n*n
+print('Заполняем центр','x=',n//2, 'y=', n//2, b[n//2][n//2])
+
+#Заполняем верхнюю горизонталь
+print('Заполняем верхнюю горизонталь №=', step)
+for dy in range(n-1):
+  b[x][dy] = a
+  a +=1
+  count+=1
+  print('x=',x, 'y=', dy, b[x][dy], count) 
+
+
+#Заполняем правый стобец
+print('Заполняем правый стобец №=', step)
+y = n-1
+for dx in range(n-1):
+  b[dx][y] = a
+  a +=1
+  print('x=',dx, 'y=', y, b[dx][y], count)
+
+#Заполняем нижнюю горизонталь
+print('Заполняем нижнюю горизонталь №=', step)
+x=n-1
+for dy in range(n-1,0,-1):
+    b[x][dy] = a
+    a +=1
+          
+    print('x=',x, 'y=', dy, b[x][dy], count)
+
+#Заполняем левый стобец
+print('Заполняем левый стобец №=', step)
+y=0
+for dx in range(n-1,0,-1):
+    b[dx][y] = a
+    a +=1
+     
+    print('x=',dx, 'y=', y, b[dx][y], count)
+
+
+
+
+#Определяем координаты начала следующего шага
+x=n-count-1
+y=count
+step +=1
+
+print()
+
+while step <= n-1:
+  count=0 
+  print('Вниз,   шаг №=', step)
+  
+  for dx in range(x,n-step):
+    b[dx][y] = a
+    a +=1
+    count +=1
+    print('x=',dx, 'y=', y, b[dx][y], count)
+  if step > n-1:
+    break 
+  print()
+
+
+  #Определяем координаты начала следующего шага 
+  x=count
+  count=0
+  print('Влево, шаг №=', step)
+   
+  for dy in range((n-step),n-x-1,-1):
+    b[x][dy] = a
+    a +=1
+    count +=1     
+    print('x=',x, 'y=', dy, b[x][dy], count)
+   
+  
+  #Определяем координаты начала следующего шага 
+  
+  y=n-count-1
+  step +=1
+  #ax=x
+  #by=count
+  count=0
+  if step > n-1:
+    break
+
+  print('Вверх, шаг №=', step)
+  
+  for dx in range(x,y+1,-1):
+    b[dx][y] = a
+    a +=1
+    count +=1
+    print('x=',dx, 'y=', y, b[dx][y], count)
+  if step > n-1:
+    break
+  #Определяем координаты начала следующего шага
+  
+  
+  x=n-count-1
+  count=0
+
+  print('Вправо, шаг №=', step)
+  
+  for dy in range(n-step):
+    b[x][dy] = a
+    a +=1
+    count +=1
+    print('x=',x, 'y=', dy, b[x][dy], count)
+  step+=1
+   
+  if step > n-1:
+    break
+  #Определяем координаты начала следующего шага
+  
+  y=n-step+1
+
+
+
+
+print("@@@@@@@@@@@@@@@@@@@@@")
+for i in range(n):
+  for j in range(n):
+    print(b[i][j], end=' ')
+  print()
